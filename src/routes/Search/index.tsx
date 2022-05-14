@@ -1,16 +1,16 @@
 import styles from './SearchList.module.scss'
 import { useEffect, useRef, useState, Suspense } from 'react'
-import axios from 'axios'
 import MovieItem from './Item'
 import LNB from './lnb'
 import _ from 'lodash'
+import { getMovieDataApi } from 'services/movie'
 
 const SearchList = () => {
-  const [movieData, setMovieData] = useState<any>([])
-  const [movieTitle, setMovieTitle] = useState('')
+  const [movieData, setMovieData] = useState<never[]>([])
+  const [movieTitle, setMovieTitle] = useState<string>('')
   const [pageNumber, setPageNumber] = useState<number>(1)
-  const [isTitleChanged, setIsTitleChanged] = useState(false)
-  const [errorMsg, setErrorMsg] = useState('검색 결과가 없습니다.')
+  const [isTitleChanged, setIsTitleChanged] = useState<boolean>(false)
+  const [errorMsg, setErrorMsg] = useState<string>('검색 결과가 없습니다.')
 
   const uniqueIdData = _.uniqBy(movieData, 'imdbID')
 
@@ -27,44 +27,35 @@ const SearchList = () => {
     }
   }, [])
 
-  // 인터셉트 코드로 바꾸기
   useEffect(() => {
-    const fetchData = async () => {
-      const url = `https://www.omdbapi.com/?apikey=92e32667&s=${movieTitle}&page=${pageNumber}`
-
-      await axios({
-        method: 'get',
-        url,
-      }).then((res) => {
-        if (res.data.Response === 'False') {
-          switch (res.data.Error) {
-            case 'Too many results.': {
-              setErrorMsg('검색 결과가 너무 많습니다.')
-              break
-            }
-            case 'Movie not found!': {
-              if (!isTitleChanged) {
-                setErrorMsg('마지막 페이지입니다.')
-                return
-              }
-              setErrorMsg('검색 결과가 없습니다.')
-              break
-            }
+    getMovieDataApi({ s: movieTitle, page: pageNumber }).then((res) => {
+      if (res.data.Response === 'False') {
+        switch (res.data.Error) {
+          case 'Too many results.': {
+            setErrorMsg('검색 결과가 너무 많습니다.')
+            break
           }
-          setMovieData([])
-          return
+          case 'Movie not found!': {
+            if (!isTitleChanged) {
+              setErrorMsg('마지막 페이지입니다.')
+              return
+            }
+            setErrorMsg('검색 결과가 없습니다.')
+            break
+          }
         }
-        if (isTitleChanged) {
-          setErrorMsg('')
-          setMovieData([])
-          setIsTitleChanged(false)
-          return
-        }
+        setMovieData([])
+        return
+      }
+      if (isTitleChanged) {
         setErrorMsg('')
-        setMovieData((prev: any) => prev.concat(...res.data.Search))
-      })
-    }
-    fetchData()
+        setMovieData([])
+        setIsTitleChanged(false)
+        return
+      }
+      setErrorMsg('')
+      setMovieData((prev: any) => prev.concat(...res.data.Search))
+    })
   }, [pageNumber, movieTitle, isTitleChanged])
 
   return (
