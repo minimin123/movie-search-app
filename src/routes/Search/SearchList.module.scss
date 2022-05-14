@@ -1,0 +1,176 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/constants/levels';
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/position';
+
+main {
+  position: relative;
+  width: 360px;
+  height: 660px;
+  overflow: hidden;
+  background-color: #f8ceec;
+  background-image: linear-gradient(315deg, #f8ceec 0%, #a88beb 74%);
+  border-radius: 60px 60px 0 0;
+
+  .movieSearchWrapper {
+    height: 560px;
+    padding: 0 40px;
+    overflow: auto;
+  }
+
+  .guidance {
+    font-size: 32px;
+    font-weight: 600;
+    color: colors.$WHITE;
+    word-break: keep-all;
+  }
+
+  .title {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 30px 0 24px;
+    font-size: 12px;
+    font-weight: 600;
+    color: colors.$WHITE;
+    letter-spacing: 0.05em;
+    border: 1px solid colors.$WHITE;
+    border-radius: 50px;
+  }
+
+  .scrollBox {
+    min-height: 400px;
+
+    strong {
+      display: block;
+      padding-top: 20px;
+      font-weight: 600;
+      color: colors.$WHITE;
+      text-align: center;
+    }
+  }
+
+  .moreButton {
+    opacity: 0;
+  }
+
+  .movieItemWrapper {
+    position: relative;
+    border-radius: 16px;
+
+    + .movieItemWrapper {
+      margin-top: 18px;
+    }
+
+    .bookMarkPopup {
+      position: absolute;
+      left: center;
+      z-index: 1;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 150px;
+      color: colors.$WHITE;
+      background-color: rgb(51, 50, 67, 75%);
+      border-radius: 16px;
+
+      .whiteButton {
+        padding: 10px 20px;
+        margin: 20px;
+        font-weight: 600;
+        color: rgb(100, 54, 135);
+        background-color: colors.$WHITE;
+        border: none;
+        border-radius: 8px;
+      }
+
+      .pinkButton {
+        padding: 10px 20px;
+        margin: 20px;
+        font-weight: 600;
+        color: rgb(100, 54, 135);
+        background-color: rgb(248, 206, 236);
+        border: none;
+        border-radius: 8px;
+      }
+    }
+  }
+
+  .movieItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 150px;
+    padding: 15px;
+    cursor: pointer;
+    background-color: rgba(colors.$WHITE, 40%);
+    border-radius: 16px;
+    box-shadow: 0 10px 20px 0 rgba(colors.$BLACK, 2%);
+
+    img {
+      width: 85px;
+      height: 125px;
+      margin: 0 10px 0 0;
+      border-radius: 5px;
+    }
+
+    .movieInfo {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 125px;
+      padding: 10px 0;
+
+      h2 {
+        -webkit-box-orient: vertical;
+        height: 38px;
+        overflow: hidden;
+        font-size: 18px;
+        color: rgb(100, 54, 135);
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        -webkit-line-clamp: 2;
+      }
+
+      p {
+        color: rgb(51, 50, 67);
+      }
+
+      button {
+        width: 100px;
+      }
+    }
+
+    .marker {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+  }
+
+  .lnb {
+    display: flex;
+    justify-content: center;
+    width: 360px;
+    height: 100px;
+    margin: 0 0 10px;
+    background-color: transparent;
+    border-radius: 60px 60px 0 0;
+  }
+
+  input {
+    width: 300px;
+    height: 50px;
+    padding: 10px 20px;
+    margin: 40px 0 20px;
+    color: colors.$WHITE;
+    background-color: rgba(colors.$WHITE, 15%);
+    border-radius: 50px;
+    box-shadow: 0 10px 20px 0 rgba(colors.$GRAYA, 10%);
+  }
+
+  input::placeholder {
+    color: colors.$WHITE;
+  }
+}
