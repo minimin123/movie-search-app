@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import styles from './BookMark.module.scss'
 import store from 'storejs'
+import { Draggable } from 'react-beautiful-dnd'
 
-const BookMarkItem = ({ movie, setIsEdited }: any) => {
+const BookMarkItem = ({ movie, setIsEdited, index, id }: any) => {
   const [isClicked, setIsClicked] = useState(false)
   const [isBookMarked, setIsBookMarked] = useState(false)
 
@@ -39,29 +40,38 @@ const BookMarkItem = ({ movie, setIsEdited }: any) => {
   }
 
   return (
-    <div className={styles.movieItemWrapper}>
-      {isClicked && (
-        <section className={styles.bookMarkPopup}>
-          <button type='button' onClick={handleBookMarkDeleteClick}>
-            즐겨찾기 취소
-          </button>
-          <button type='button' onClick={handleMovieClick}>
-            닫기
-          </button>
-        </section>
-      )}
-      <li>
-        <div className={styles.movieItem} onClick={handleMovieClick} role='button' aria-hidden>
-          <img src={Poster} alt={Title} />
-          <section className={styles.movieInfo}>
-            <h2>{Title}</h2>
-            <p>{Year}</p>
-            <p>{Type}</p>
-          </section>
-          {isBookMarked && <div className={styles.marker}>⭐️</div>}
+    <Draggable draggableId={id} index={index}>
+      {(provided) => (
+        <div
+          className={styles.movieItemWrapper}
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          {isClicked && (
+            <section className={styles.bookMarkPopup}>
+              <button type='button' onClick={handleBookMarkDeleteClick}>
+                즐겨찾기 취소
+              </button>
+              <button type='button' onClick={handleMovieClick}>
+                닫기
+              </button>
+            </section>
+          )}
+          <li>
+            <div className={styles.movieItem} onClick={handleMovieClick} role='button' aria-hidden>
+              <img src={Poster} alt={Title} />
+              <section className={styles.movieInfo}>
+                <h2>{Title}</h2>
+                <p>{Year}</p>
+                <p>{Type}</p>
+              </section>
+              {isBookMarked && <div className={styles.marker}>⭐️</div>}
+            </div>
+          </li>
         </div>
-      </li>
-    </div>
+      )}
+    </Draggable>
   )
 }
 

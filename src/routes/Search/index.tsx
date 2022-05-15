@@ -1,9 +1,10 @@
 import styles from './SearchList.module.scss'
-import { useEffect, useRef, useState, Suspense } from 'react'
+import { Suspense, useEffect, useRef, useState } from 'react'
 import MovieItem from './Item'
 import LNB from './lnb'
 import _ from 'lodash'
 import { getMovieDataApi } from 'services/movie'
+import { IMovieData } from 'types/movie'
 
 const SearchList = () => {
   const [movieData, setMovieData] = useState<never[]>([])
@@ -14,9 +15,9 @@ const SearchList = () => {
 
   const uniqueIdData = _.uniqBy(movieData, 'imdbID')
 
-  const fetchMoreTrigger = useRef<any>()
+  const fetchMoreTrigger = useRef<any>(null)
   const fetchMoreObserver = new IntersectionObserver(([{ isIntersecting }]) => {
-    if (isIntersecting) setPageNumber((prev) => prev + 1)
+    if (isIntersecting) setPageNumber((prev: number) => prev + 1)
   })
 
   useEffect(() => {
@@ -54,33 +55,33 @@ const SearchList = () => {
         return
       }
       setErrorMsg('')
-      setMovieData((prev: any) => prev.concat(...res.data.Search))
+      setMovieData((prev: never[]) => prev.concat(...res.data.Search))
     })
   }, [pageNumber, movieTitle, isTitleChanged])
 
   return (
-    <Suspense fallback={<div>로딩중</div>}>
-      <main>
-        <LNB setMovieTitle={setMovieTitle} setPageNumber={setPageNumber} setIsTitleChanged={setIsTitleChanged} />
-        <div className={styles.movieSearchWrapper}>
-          <div>
-            <p className={styles.guidance}>관심있는 영화를 검색하고 즐겨찾기에 추가해 보세요.</p>
-            <h1 className={styles.title}>검색 결과</h1>
-            <ul>
-              <div className={styles.scrollBox}>
-                {uniqueIdData?.map((movie: any) => (
+    <main>
+      <LNB setMovieTitle={setMovieTitle} setPageNumber={setPageNumber} setIsTitleChanged={setIsTitleChanged} />
+      <div className={styles.movieSearchWrapper}>
+        <div>
+          <p className={styles.guidance}>관심있는 영화를 검색하고 즐겨찾기에 추가해 보세요.</p>
+          <h1 className={styles.title}>검색 결과</h1>
+          <ul>
+            <div className={styles.scrollBox}>
+              <Suspense fallback={<div>로딩중...</div>}>
+                {uniqueIdData?.map((movie: IMovieData) => (
                   <MovieItem key={movie.imdbID} movie={movie} />
                 ))}
                 <strong>{errorMsg}</strong>
-              </div>
-              <div className={styles.moreButton} ref={fetchMoreTrigger}>
-                다음 페이지로
-              </div>
-            </ul>
-          </div>
+              </Suspense>
+            </div>
+            <div className={styles.moreButton} ref={fetchMoreTrigger}>
+              다음 페이지로
+            </div>
+          </ul>
         </div>
-      </main>
-    </Suspense>
+      </div>
+    </main>
   )
 }
 

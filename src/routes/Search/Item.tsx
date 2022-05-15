@@ -3,6 +3,7 @@ import styles from './SearchList.module.scss'
 import store from 'storejs'
 import defaultImage from '../../assets/movie.jpeg'
 import Modal from './modal'
+import { IMovieData } from 'types/movie'
 
 const MovieItem = ({ movie }: any) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -21,7 +22,7 @@ const MovieItem = ({ movie }: any) => {
   const prevBookMarkList = store.get('bookMark')
 
   useEffect(() => {
-    if (prevBookMarkList?.find((el: any) => el.imdbID === imdbID)) {
+    if (prevBookMarkList?.find((el: IMovieData) => el.imdbID === imdbID)) {
       setIsBookMarked(true)
     }
   }, [prevBookMarkList, imdbID])
@@ -34,7 +35,7 @@ const MovieItem = ({ movie }: any) => {
     if (!prevBookMarkList) {
       store.set('bookMark', [currentMovieInfo])
     } else {
-      store.set('bookMark', [currentMovieInfo, ...prevBookMarkList])
+      store.set('bookMark', [currentMovieInfo, ...store.get('bookMark')])
     }
     setIsBookMarked(true)
     setIsMenuOpen((prev) => !prev)
@@ -43,7 +44,7 @@ const MovieItem = ({ movie }: any) => {
   const handleBookMarkDeleteClick = () => {
     store.set(
       'bookMark',
-      prevBookMarkList.filter((item: any) => item.imdbID !== currentMovieInfo.imdbID)
+      store.get('bookMark').filter((item: IMovieData) => item.imdbID !== currentMovieInfo.imdbID)
     )
     setIsMenuOpen((prev) => !prev)
     setIsBookMarked(false)
