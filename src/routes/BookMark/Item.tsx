@@ -4,7 +4,10 @@ import { useEffect, useState } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import store from 'storejs'
 import { IMovieData } from 'types/movie'
+
 import Modal from './modal'
+
+import { FilledHeartIcon, HeartIcon } from 'assets/svgs'
 
 const BookMarkItem = ({ movie, setIsEdited, index, id }: any) => {
   const [isClicked, setIsClicked] = useState(false)
@@ -62,7 +65,7 @@ const BookMarkItem = ({ movie, setIsEdited, index, id }: any) => {
                 <p>{Year}</p>
                 <p>{Type}</p>
               </section>
-              {isBookMarked && <div className={styles.marker}>⭐️</div>}
+              <div className={styles.marker}>{isBookMarked ? <FilledHeartIcon /> : <HeartIcon />}</div>
             </div>
           </li>
         </div>

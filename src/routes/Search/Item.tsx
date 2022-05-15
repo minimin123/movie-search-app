@@ -6,6 +6,8 @@ import store from 'storejs'
 import Modal from './modal'
 
 import defaultImage from '../../assets/movie.jpeg'
+import { FilledHeartIcon, HeartIcon } from 'assets/svgs'
+
 import { IMovieData } from 'types/movie'
 
 const MovieItem = ({ movie }: any) => {
@@ -71,7 +73,7 @@ const MovieItem = ({ movie }: any) => {
             <p>{Year}</p>
             <p>{Type}</p>
           </section>
-          {isBookMarked && <div className={styles.marker}>⭐️</div>}
+          <div className={styles.marker}>{isBookMarked ? <FilledHeartIcon /> : <HeartIcon />}</div>
         </div>
       </li>
     </div>
