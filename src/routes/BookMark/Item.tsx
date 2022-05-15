@@ -3,6 +3,8 @@ import styles from './BookMark.module.scss'
 import { useEffect, useState } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import store from 'storejs'
+import { IMovieData } from 'types/movie'
+import Modal from './modal'
 
 const BookMarkItem = ({ movie, setIsEdited, index, id }: any) => {
   const [isClicked, setIsClicked] = useState(false)
@@ -21,7 +23,7 @@ const BookMarkItem = ({ movie, setIsEdited, index, id }: any) => {
   const prevBookMarkList = store.get('bookMark')
 
   useEffect(() => {
-    if (prevBookMarkList?.find((el: any) => el.imdbID === imdbID)) {
+    if (prevBookMarkList?.find((el: IMovieData) => el.imdbID === imdbID)) {
       setIsBookMarked(true)
     }
   }, [prevBookMarkList, imdbID])
@@ -33,7 +35,7 @@ const BookMarkItem = ({ movie, setIsEdited, index, id }: any) => {
   const handleBookMarkDeleteClick = () => {
     store.set(
       'bookMark',
-      prevBookMarkList.filter((item: any) => item.imdbID !== currentMovieInfo.imdbID)
+      prevBookMarkList.filter((item: IMovieData) => item.imdbID !== currentMovieInfo.imdbID)
     )
     setIsClicked((prev) => !prev)
     setIsBookMarked(false)
@@ -50,14 +52,7 @@ const BookMarkItem = ({ movie, setIsEdited, index, id }: any) => {
           {...provided.dragHandleProps}
         >
           {isClicked && (
-            <section className={styles.bookMarkPopup}>
-              <button type='button' onClick={handleBookMarkDeleteClick}>
-                즐겨찾기 취소
-              </button>
-              <button type='button' onClick={handleMovieClick}>
-                닫기
-              </button>
-            </section>
+            <Modal handleBookMarkDeleteClick={handleBookMarkDeleteClick} handleMovieClick={handleMovieClick} />
           )}
           <li>
             <div className={styles.movieItem} onClick={handleMovieClick} role='button' aria-hidden>
