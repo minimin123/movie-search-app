@@ -32,11 +32,13 @@ const BookMark = () => {
     <main className={styles.bookMarkMain}>
       <div className={styles.bookMarkWrapper}>
         <h1>내 즐겨찾기</h1>
+        <article>등록한 카드를 드래그하여 순서를 변경해 보세요.</article>
+        {movieData.length < 1 && <strong>즐겨찾기에 추가한 영화가 없습니다.</strong>}
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId='movieList'>
             {(provided) => (
               <ul {...provided.droppableProps} ref={provided.innerRef}>
-                {movieData?.map((movie: IMovieData, index) => (
+                {movieData.map((movie: IMovieData, index) => (
                   <BookMarkItem
                     key={movie.imdbID}
                     movie={movie}

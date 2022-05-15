@@ -16,21 +16,37 @@
   .bookMarkWrapper {
     position: relative;
     height: 660px;
-    padding: 80px 40px 20px;
+    padding: 60px 40px 20px;
+  }
+
+  strong {
+    display: block;
+    padding: 30px 10px;
+    font-weight: 600;
+    color: colors.$WHITE;
+    text-align: center;
   }
 
   h1 {
     padding-bottom: 20px;
-    margin-bottom: 20px;
     font-size: 32px;
     font-weight: 600;
+    color: colors.$WHITE;
+  }
+
+  article {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 200;
     color: colors.$WHITE;
     word-break: keep-all;
     border-bottom: 1px solid colors.$WHITE;
   }
 
   ul {
-    height: 500px;
+    height: 470px;
+    padding-bottom: 20px;
     overflow: auto;
   }
 
