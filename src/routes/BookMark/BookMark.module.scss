@@ -120,8 +120,14 @@
       padding: 10px 0;
 
       h2 {
+        -webkit-box-orient: vertical;
+        height: 38px;
+        overflow: hidden;
         font-size: 18px;
         color: rgb(100, 54, 135);
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        -webkit-line-clamp: 2;
       }
 
       p {
@@ -143,6 +149,14 @@
       width: 25px;
       height: 25px;
       fill: rgb(255, 56, 91);
+    }
+
+    :hover {
+      position: absolute;
+      right: -3px;
+      bottom: -1px;
+      width: 30px;
+      height: 30px;
     }
   }
 }
