@@ -1,6 +1,12 @@
 import styles from './SearchList.module.scss'
 
-const Modal = ({ isBookMarked, handleBookMarkDeleteClick, handleBookMarkAddClick, handleMovieClick }: any) => {
+interface Props {
+  isBookMarked: boolean
+  handleBookMarkDeleteClick: () => void
+  handleBookMarkAddClick: () => void
+  handleMovieClick: () => void
+}
+const Modal = ({ isBookMarked, handleBookMarkDeleteClick, handleBookMarkAddClick, handleMovieClick }: Props) => {
   return (
     <section className={styles.bookMarkPopup}>
       <button

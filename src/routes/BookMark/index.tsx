@@ -9,7 +9,7 @@ import BookMarkItem from './Item'
 import { IMovieData } from 'types/movie'
 
 const BookMark = () => {
-  const [movieData, setMovieData] = useState<never[]>([])
+  const [movieData, setMovieData] = useState([])
   const [isEdited, setIsEdited] = useState<boolean>(false)
 
   useEffect(() => {

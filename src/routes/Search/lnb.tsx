@@ -1,17 +1,22 @@
 import styles from './SearchList.module.scss'
 
-import { useState } from 'react'
+import React, { FormEventHandler, useState } from 'react'
 
 import { SearchIcon } from 'assets/svgs'
 
-const LNB = ({ setMovieTitle, setPageNumber, setIsTitleChanged }: any) => {
+interface Props {
+  setMovieTitle: (_: string) => void
+  setPageNumber: (_: number) => void
+  setIsTitleChanged: (_: boolean) => void
+}
+const LNB = ({ setMovieTitle, setPageNumber, setIsTitleChanged }: Props) => {
   const [title, setTitle] = useState('')
 
-  const handleSearchInput = (e: any) => {
+  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value)
   }
 
-  const handleSearchClick = (e: any) => {
+  const handleSearchClick = (e: React.MouseEvent<HTMLButtonElement> | FormEventHandler<HTMLFormElement> | any) => {
     e.preventDefault()
     setMovieTitle(title)
     setPageNumber(1)

@@ -11,7 +11,7 @@ import { getMovieDataApi } from 'services/movie'
 import { IMovieData } from 'types/movie'
 
 const SearchList = () => {
-  const [movieData, setMovieData] = useState<never[]>([])
+  const [movieData, setMovieData] = useState([])
   const [movieTitle, setMovieTitle] = useState<string>('')
   const [pageNumber, setPageNumber] = useState<number>(1)
   const [isTitleChanged, setIsTitleChanged] = useState<boolean>(false)
@@ -58,7 +58,7 @@ const SearchList = () => {
         return
       }
       setErrorMsg('')
-      setMovieData((prev: never[]) => prev.concat(...res.data.Search))
+      setMovieData((prev) => prev.concat(...res.data.Search))
     })
   }, [pageNumber, movieTitle, isTitleChanged])
 
@@ -72,7 +72,7 @@ const SearchList = () => {
           <ul>
             <div className={styles.scrollBox}>
               <Suspense fallback={<div>로딩중...</div>}>
-                {uniqueIdData?.map((movie: IMovieData) => (
+                {uniqueIdData.map((movie: IMovieData) => (
                   <MovieItem key={movie.imdbID} movie={movie} />
                 ))}
                 <strong>{errorMsg}</strong>

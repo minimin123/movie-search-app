@@ -10,7 +10,11 @@ import { FilledHeartIcon, HeartIcon } from 'assets/svgs'
 
 import { IMovieData } from 'types/movie'
 
-const MovieItem = ({ movie }: any) => {
+interface IProps {
+  movie: IMovieData
+}
+
+const MovieItem = ({ movie }: IProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isBookMarked, setIsBookMarked] = useState(false)
 

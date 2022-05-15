@@ -9,7 +9,14 @@ import Modal from './modal'
 
 import { FilledHeartIcon, HeartIcon } from 'assets/svgs'
 
-const BookMarkItem = ({ movie, setIsEdited, index, id }: any) => {
+interface IProps {
+  movie: IMovieData
+  setIsEdited: any
+  index: number
+  id: string
+}
+
+const BookMarkItem = ({ movie, setIsEdited, index, id }: IProps) => {
   const [isClicked, setIsClicked] = useState(false)
   const [isBookMarked, setIsBookMarked] = useState(false)
 
