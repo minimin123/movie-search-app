@@ -26,9 +26,8 @@ const SearchList = () => {
 
   useMount(() => {
     fetchMoreObserver.observe(fetchMoreTrigger.current)
-    const observerRefValue = fetchMoreTrigger.current
     return () => {
-      if (observerRefValue) fetchMoreObserver.unobserve(observerRefValue)
+      fetchMoreObserver.unobserve(fetchMoreTrigger.current)
     }
   })
 
