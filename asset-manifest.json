@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/minimin123/movie-search-app/static/css/main.adea9c6b.css",
+    "main.js": "/minimin123/movie-search-app/static/js/main.e26453b2.js",
+    "static/js/787.68ea1acb.chunk.js": "/minimin123/movie-search-app/static/js/787.68ea1acb.chunk.js",
+    "static/media/heart.svg": "/minimin123/movie-search-app/static/media/heart.490854a761ee6d31ba7a0cc21789ba00.svg",
+    "static/media/SearchButton.svg": "/minimin123/movie-search-app/static/media/SearchButton.571af46526c7b8c9e43a20b4c44fe7be.svg",
+    "index.html": "/minimin123/movie-search-app/index.html",
+    "static/media/filled_heart.svg": "/minimin123/movie-search-app/static/media/filled_heart.034ab29153e2bd27e58908f6342659fe.svg",
+    "main.adea9c6b.css.map": "/minimin123/movie-search-app/static/css/main.adea9c6b.css.map",
+    "main.e26453b2.js.map": "/minimin123/movie-search-app/static/js/main.e26453b2.js.map",
+    "787.68ea1acb.chunk.js.map": "/minimin123/movie-search-app/static/js/787.68ea1acb.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.adea9c6b.css",
+    "static/js/main.e26453b2.js"
+  ]
+}
