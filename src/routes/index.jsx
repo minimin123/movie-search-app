@@ -1,5 +1,7 @@
 import styles from './Routes.module.scss'
+
 import { Routes, Route } from 'react-router-dom'
+
 import SearchList from './Search'
 import GNB from 'routes/_shared/GNB'
 import BookMark from './BookMark'

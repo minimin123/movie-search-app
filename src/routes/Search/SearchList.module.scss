@@ -157,20 +157,42 @@ main {
     margin: 0 0 10px;
     background-color: transparent;
     border-radius: 60px 60px 0 0;
-  }
 
-  input {
-    width: 300px;
-    height: 50px;
-    padding: 10px 20px;
-    margin: 40px 0 20px;
-    color: colors.$WHITE;
-    background-color: rgba(colors.$WHITE, 15%);
-    border-radius: 50px;
-    box-shadow: 0 10px 20px 0 rgba(colors.$GRAYA, 10%);
-  }
+    .inputWrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 300px;
+      height: 50px;
+      padding: 10px 20px;
+      margin: 40px 0 20px;
+      background-color: rgba(colors.$WHITE, 15%);
+      border-radius: 50px;
+      box-shadow: 0 10px 20px 0 rgba(colors.$GRAYA, 10%);
 
-  input::placeholder {
-    color: colors.$WHITE;
+      input {
+        color: colors.$WHITE;
+      }
+
+      input::placeholder {
+        color: colors.$WHITE;
+      }
+
+      button {
+        width: 30px;
+        height: 30px;
+
+        svg {
+          width: 24px;
+          height: 24px;
+          fill: colors.$WHITE;
+        }
+
+        :hover {
+          fill: rgb(250, 214, 221);
+        }
+      }
+    }
   }
 }

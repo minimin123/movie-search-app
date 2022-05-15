@@ -1,9 +1,12 @@
 import styles from './BookMark.module.scss'
+
 import { useEffect, useState } from 'react'
-import store from 'storejs'
-import BookMarkItem from './Item'
-import { IMovieData } from 'types/movie'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
+import store from 'storejs'
+
+import BookMarkItem from './Item'
+
+import { IMovieData } from 'types/movie'
 
 const BookMark = () => {
   const [movieData, setMovieData] = useState<never[]>([])

@@ -1,8 +1,12 @@
 import styles from './SearchList.module.scss'
+
 import { Suspense, useEffect, useRef, useState } from 'react'
+import { useMount } from 'hooks'
+import _ from 'lodash'
+
 import MovieItem from './Item'
 import LNB from './lnb'
-import _ from 'lodash'
+
 import { getMovieDataApi } from 'services/movie'
 import { IMovieData } from 'types/movie'
 
@@ -20,13 +24,13 @@ const SearchList = () => {
     if (isIntersecting) setPageNumber((prev: number) => prev + 1)
   })
 
-  useEffect(() => {
+  useMount(() => {
     fetchMoreObserver.observe(fetchMoreTrigger.current)
     const observerRefValue = fetchMoreTrigger.current
     return () => {
       if (observerRefValue) fetchMoreObserver.unobserve(observerRefValue)
     }
-  }, [])
+  })
 
   useEffect(() => {
     getMovieDataApi({ s: movieTitle, page: pageNumber }).then((res) => {

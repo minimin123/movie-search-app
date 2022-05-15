@@ -1,8 +1,11 @@
-import { useEffect, useState } from 'react'
 import styles from './SearchList.module.scss'
+
+import { useEffect, useState } from 'react'
 import store from 'storejs'
-import defaultImage from '../../assets/movie.jpeg'
+
 import Modal from './modal'
+
+import defaultImage from '../../assets/movie.jpeg'
 import { IMovieData } from 'types/movie'
 
 const MovieItem = ({ movie }: any) => {

@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
 import styles from './BookMark.module.scss'
-import store from 'storejs'
+
+import { useEffect, useState } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
+import store from 'storejs'
 
 const BookMarkItem = ({ movie, setIsEdited, index, id }: any) => {
   const [isClicked, setIsClicked] = useState(false)
