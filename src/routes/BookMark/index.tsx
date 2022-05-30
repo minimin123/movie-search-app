@@ -13,7 +13,9 @@ const BookMark = () => {
   const [isEdited, setIsEdited] = useState<boolean>(false)
 
   useEffect(() => {
-    setMovieData(store.get('bookMark'))
+    if (store.get('bookMark')) {
+      setMovieData(store.get('bookMark'))
+    }
   }, [isEdited])
 
   const onDragEnd = (result: any) => {
